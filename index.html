@@ -1056,7 +1056,10 @@
             csvContent += "ISD Sojitz BBQ Expense Ledger\n\n";
             csvContent += "Description,Payer,Amount\n";
             appState.expenses.forEach(e => {
-                csvContent += `"${e.desc}","${e.payer}",${Number(e.amount).toFixed(2)}\n`;
+                // Escape quotes and commas in description/payer
+                const desc = `"${e.desc.replace(/"/g, '""')}"`;
+                const payer = `"${e.payer.replace(/"/g, '""')}"`;
+                csvContent += `${desc},${payer},${Number(e.amount).toFixed(2)}\n`;
             });
             csvContent += `\nTotal Spent,,${totalSpent.toFixed(2)}\n`;
             csvContent += `Participants,,${participantCount}\n`;
@@ -1065,11 +1068,11 @@
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "ISD_BBQ_Expenses_2026.xlsx");
+            link.setAttribute("download", "ISD_BBQ_Expenses_2026.csv");
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            showToast("Downloaded Expense Spreadsheet (.xlsx)!");
+            showToast("Downloaded Expense Spreadsheet (.csv)! Open directly in Excel.");
         }
 
         function renderPlaylist() {
