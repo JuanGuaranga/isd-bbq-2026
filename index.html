@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISD Sojitz BBQ Central | Minimalist Zen Edition</title>
+    <title>2026 Outing | ISD</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Plus Jakarta Sans & Noto Sans JP -->
@@ -88,7 +88,7 @@
 </head>
 <body class="min-h-full flex flex-col antialiased custom-bg-image relative">
 
-    <!-- STRICT PASSWORD GATE OVERLAY (Session-based: closes when tab/browser closes) -->
+    <!-- STRICT PASSWORD GATE OVERLAY -->
     <div id="passwordGate" class="fixed inset-0 z-50 bg-[#fbf9f4] flex items-center justify-center p-4 sm:p-6 transition-opacity duration-700">
         <div class="absolute inset-0 custom-bg-image opacity-60 pointer-events-none"></div>
         
@@ -122,7 +122,7 @@
                     <i class="fa-solid fa-lock text-[10px]"></i> ISD BBQ Portal
                 </div>
                 <h2 class="text-xl sm:text-2xl font-extrabold text-stone-900 tracking-tight">ISD BBQ Central 2026</h2>
-                <p class="text-xs text-stone-600 mt-1">Please enter department access password to view the Liberty State Park gathering hub.</p>
+                <p class="text-xs text-stone-600 mt-1">Please enter the department access password to view the Liberty State Park gathering hub.</p>
             </div>
 
             <form onsubmit="handlePasswordSubmit(event)" class="space-y-4">
@@ -137,10 +137,10 @@
                 </button>
             </form>
             <div id="passwordError" class="text-xs text-rose-600 font-mono hidden">
-                Incorrect password. Hint: Helpdesk2026
+                Incorrect password
             </div>
             <div class="text-[11px] text-stone-400 font-mono pt-2">
-                Information Systems Department &bull; Tokyo HQ & NY Branch
+                Information Systems Department &bull; ISD
             </div>
         </div>
     </div>
@@ -222,10 +222,10 @@
                                 <i class="fa-solid fa-seedling"><span>ISD Gathering 2026</span></i>
                             </div>
                             <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-stone-900">
-                                Come, Share , Enjoy 🌳✨
+                                Come, Share, Enjoy 🌳✨
                             </h2>
                             <p class="text-stone-600 text-xs sm:text-base leading-relaxed">
-                                Welcome, Information Systems Department team! It has been a while since our last wonderful outing, we are returning to the peaceful <strong>Liberty State Park</strong>. Use this hub to vote on October Saturdays, coordinate potluck items, split expenses, and check out travel routes.
+                                Welcome, Information Systems Department team! It has been a while since our last wonderful outing; we are returning to the peaceful <strong>Liberty State Park</strong>. Use this hub to vote on October Saturdays, coordinate potluck items, split expenses, and check out travel routes.
                             </p>
                             
                             <div class="pt-2 flex flex-wrap gap-3">
@@ -396,7 +396,7 @@
                 </div>
             </div>
 
-            <!-- TAB 4: EXPENSES (With Download Excel Option) -->
+            <!-- TAB 4: EXPENSES (With Download Excel Button) -->
             <div id="tab-expenses" class="tab-content space-y-6">
                 <div class="zen-card zen-shadow rounded-3xl p-6 sm:p-8">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-zen-border">
@@ -406,7 +406,7 @@
                             <p class="text-xs text-stone-600 mt-1">Log receipts for groceries, permits, and equipment. Automatically computes per-person splits.</p>
                         </div>
                         <div class="flex flex-wrap gap-2 w-full sm:w-auto">
-                            <!-- Download Excel (.xlsx) Button -->
+                            <!-- Download Excel Button -->
                             <button onclick="downloadExpensesXlsx()" class="flex-1 sm:flex-none px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-file-excel"></i> Download Excel
                             </button>
@@ -715,13 +715,11 @@
                     const main = document.getElementById('mainApp');
                     main.classList.remove('hidden');
                     setTimeout(() => main.classList.remove('opacity-0'), 50);
-                    // Use sessionStorage so closing browser tab/window always locks the app again
                     sessionStorage.setItem('sojitz_isd_auth', 'true');
                     
-                    // Restore last active tab or default to overview
+                    // Resume active tab on GitHub Pages
                     const lastTab = sessionStorage.getItem('sojitz_active_tab') || 'overview';
                     switchTab(lastTab);
-                    renderAll();
                 }, 500);
             } else {
                 errEl.classList.remove('hidden');
@@ -736,7 +734,6 @@
         }
 
         function switchTab(tabId) {
-            // Save active tab in sessionStorage so refresh remembers where the user was
             sessionStorage.setItem('sojitz_active_tab', tabId);
 
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -1046,7 +1043,7 @@
             }
         }
 
-        // DOWNLOAD EXPENSES AS EXCEL (.xlsx / CSV format)
+        // DOWNLOAD EXPENSES AS EXCEL (.xlsx format)
         function downloadExpensesXlsx() {
             const totalSpent = appState.expenses.reduce((sum, e) => sum + Number(e.amount), 0);
             const participantsSet = new Set();
@@ -1248,14 +1245,12 @@
 
         window.onload = function() {
             loadStorage();
-            // Using sessionStorage so closing browser tab/window always requires password verification again
             if (sessionStorage.getItem('sojitz_isd_auth') === 'true') {
                 document.getElementById('passwordGate').classList.add('hidden');
                 const main = document.getElementById('mainApp');
                 main.classList.remove('hidden');
                 main.classList.remove('opacity-0');
                 
-                // Remember active tab on refresh
                 const lastTab = sessionStorage.getItem('sojitz_active_tab') || 'overview';
                 switchTab(lastTab);
             }
