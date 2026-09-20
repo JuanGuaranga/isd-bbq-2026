@@ -88,7 +88,7 @@
 </head>
 <body class="min-h-full flex flex-col antialiased custom-bg-image relative">
 
-    <!-- STRICT PASSWORD GATE OVERLAY -->
+    <!-- STRICT PASSWORD GATE OVERLAY (Session-based: closes when tab/browser closes) -->
     <div id="passwordGate" class="fixed inset-0 z-50 bg-[#fbf9f4] flex items-center justify-center p-4 sm:p-6 transition-opacity duration-700">
         <div class="absolute inset-0 custom-bg-image opacity-60 pointer-events-none"></div>
         
@@ -207,9 +207,6 @@
                     <button onclick="switchTab('location')" class="nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-stone-600 hover:bg-wood-50 hover:text-stone-900 whitespace-nowrap">
                         <i class="fa-solid fa-map-location-dot"></i> Map & Route / アクセス
                     </button>
-                    <!--<button onclick="switchTab('activities')" class="nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-stone-600 hover:bg-wood-50 hover:text-stone-900 whitespace-nowrap">
-                        <i class="fa-solid fa-music"></i> Activities & Jam / アクティビティ
-                    </button>-->
                 </div>
             </div>
         </nav>
@@ -245,9 +242,7 @@
                         <div class="bg-white/90 backdrop-blur-md rounded-2xl border border-wood-200 p-6 flex flex-col items-center justify-center text-center shadow-sm">
                             <h3 class="text-xs font-semibold uppercase tracking-wider text-wood-600 mb-3">BBQ Attending Radar</h3>
                             
-                            <div id="chibiContainer" class="w-28 h-28 mb-3 transition-all duration-300 transform hover:scale-105">
-                                <!-- Dynamic Chibi SVG -->
-                            </div>
+                            <div id="chibiContainer" class="w-28 h-28 mb-3 transition-all duration-300 transform hover:scale-105"></div>
                         
                             <div id="chibiStatusBadge" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-1 bg-amber-100 text-amber-800">
                                 Loading mood...
@@ -290,7 +285,7 @@
                                 <i class="fa-solid fa-receipt"></i>
                             </div>
                             <h3 class="text-lg font-bold text-stone-900">Expense Ledger</h3>
-                            <p class="text-s text-stone-600 mt-1">Log receipts for groceries, permits, and supplies. Automatically calculates per-person splits.</p>
+                            <p class="text-xs text-stone-600 mt-1">Log receipts for groceries, permits, and supplies. Automatically calculates per-person splits.</p>
                         </div>
                         <div class="mt-6 flex items-center gap-2 text-xs font-mono text-wood-800 group-hover:translate-x-1 transition-transform">
                             Open ledger <i class="fa-solid fa-arrow-right"></i>
@@ -306,7 +301,7 @@
                         <div>
                             <div class="text-xs font-mono text-wood-800 uppercase tracking-widest">Scheduling Protocol</div>
                             <h2 class="text-2xl font-bold text-stone-900 mt-1">October 2026 Saturday Poll / 日程投票</h2>
-                            <p class="text-s text-stone-600 mt-1">Please select all Saturdays you can attend</p>
+                            <p class="text-xs text-stone-600 mt-1">Please select all Saturdays you can attend</p>
                         </div>
                         <button onclick="openVoteModal()" class="w-full sm:w-auto px-5 py-2.5 bg-wood-800 hover:bg-wood-900 text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-2">
                             <i class="fa-solid fa-check-to-slot"></i> Cast / Update Vote
@@ -342,7 +337,7 @@
                         <div>
                             <div class="text-xs font-mono text-wood-800 uppercase tracking-widest">American BBQ & Izakaya Fusion</div>
                             <h2 class="text-2xl font-bold text-stone-900 mt-1">Bento & Grill Menu Board / 持ち寄りボード</h2>
-                            <p class="text-s text-stone-600 mt-1">Confirm your RSVP headcount, dietary preferences, and what delicious items you are bringing.</p>
+                            <p class="text-xs text-stone-600 mt-1">Confirm your RSVP headcount, dietary preferences, and what delicious items you are bringing.</p>
                         </div>
                         <button onclick="openRsvpModal()" class="w-full sm:w-auto px-5 py-2.5 bg-wood-800 hover:bg-wood-900 text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-2">
                             <i class="fa-solid fa-user-plus"></i> RSVP & Bring Item
@@ -401,7 +396,7 @@
                 </div>
             </div>
 
-            <!-- TAB 4: EXPENSES -->
+            <!-- TAB 4: EXPENSES (With Download Excel Option) -->
             <div id="tab-expenses" class="tab-content space-y-6">
                 <div class="zen-card zen-shadow rounded-3xl p-6 sm:p-8">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-zen-border">
@@ -410,9 +405,15 @@
                             <h2 class="text-2xl font-bold text-stone-900 mt-1">Expense & Settlement Ledger / 経費精算</h2>
                             <p class="text-xs text-stone-600 mt-1">Log receipts for groceries, permits, and equipment. Automatically computes per-person splits.</p>
                         </div>
-                        <button onclick="openExpenseModal()" class="w-full sm:w-auto px-5 py-2.5 bg-wood-800 hover:bg-wood-900 text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-receipt"></i> Log New Receipt
-                        </button>
+                        <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                            <!-- Download Excel (.xlsx) Button -->
+                            <button onclick="downloadExpensesXlsx()" class="flex-1 sm:flex-none px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-file-excel"></i> Download Excel
+                            </button>
+                            <button onclick="openExpenseModal()" class="flex-1 sm:flex-none px-4 py-2.5 bg-wood-800 hover:bg-wood-900 text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-receipt"></i> Log New Receipt
+                            </button>
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 my-6">
@@ -535,23 +536,6 @@
                 </div>
             </div>
 
-            <!-- TAB 6: ACTIVITIES & JAM -->
-            <div id="tab-activities" class="tab-content space-y-6">
-                <div class="zen-card zen-shadow rounded-3xl p-6 sm:p-8">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-sm font-bold text-stone-900 flex items-center gap-2 font-mono">
-                                    <i class="fa-solid fa-headphones text-wood-800"></i> ISD BBQ JAM QUEUE / プレイリスト
-                                </h3>
-                                <span id="songCountBadge" class="text-xs bg-wood-100 text-wood-900 border border-wood-200 px-2.5 py-0.5 rounded-full font-mono">0 tracks</span>
-                            </div>
-                            <div class="space-y-3" id="songListContainer"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </main>
 
         <!-- MODALS -->
@@ -655,35 +639,6 @@
             </div>
         </div>
 
-        <div id="songModal" class="fixed inset-0 z-50 bg-stone-900/40 backdrop-blur-sm hidden items-center justify-center p-4">
-            <div class="bg-white border border-wood-200 rounded-3xl max-w-md w-full p-6 sm:p-8 zen-shadow">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-lg font-bold text-stone-900 font-mono">Suggest Track / 曲の提案</h3>
-                    <button onclick="closeSongModal()" class="w-8 h-8 bg-stone-100 hover:bg-stone-200 rounded-full flex items-center justify-center text-stone-700">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-                <form id="songForm" onsubmit="handleSongSubmit(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Song Title / 曲名</label>
-                        <input type="text" id="songTitle" required placeholder="e.g. Plastic Love" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Artist / アーティスト</label>
-                        <input type="text" id="songArtist" required placeholder="e.g. Mariya Takeuchi" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Suggested By / 提案者</label>
-                        <input type="text" id="songSuggester" required placeholder="e.g. Emily Tanaka" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
-                    </div>
-                    <div class="pt-4 flex gap-3">
-                        <button type="button" onclick="closeSongModal()" class="flex-1 py-3 bg-stone-100 hover:bg-stone-200 font-semibold rounded-xl text-xs text-stone-700 transition-all">Cancel</button>
-                        <button type="submit" class="flex-1 py-3 bg-wood-800 hover:bg-wood-900 font-bold rounded-xl text-xs text-white shadow-sm transition-all">Add to Queue</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
         <div id="toast" class="fixed bottom-6 right-6 z-50 bg-white border border-wood-200 text-stone-900 px-5 py-3 rounded-2xl zen-shadow transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3">
             <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
             <span id="toastMessage" class="text-xs font-mono font-medium">Action successful!</span>
@@ -760,7 +715,12 @@
                     const main = document.getElementById('mainApp');
                     main.classList.remove('hidden');
                     setTimeout(() => main.classList.remove('opacity-0'), 50);
-                    localStorage.setItem('sojitz_isd_auth', 'true');
+                    // Use sessionStorage so closing browser tab/window always locks the app again
+                    sessionStorage.setItem('sojitz_isd_auth', 'true');
+                    
+                    // Restore last active tab or default to overview
+                    const lastTab = sessionStorage.getItem('sojitz_active_tab') || 'overview';
+                    switchTab(lastTab);
                     renderAll();
                 }, 500);
             } else {
@@ -770,11 +730,15 @@
         }
 
         function lockApp() {
-            localStorage.removeItem('sojitz_isd_auth');
+            sessionStorage.removeItem('sojitz_isd_auth');
+            sessionStorage.removeItem('sojitz_active_tab');
             location.reload();
         }
 
         function switchTab(tabId) {
+            // Save active tab in sessionStorage so refresh remembers where the user was
+            sessionStorage.setItem('sojitz_active_tab', tabId);
+
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(el => {
                 el.classList.remove('bg-wood-800', 'text-white', 'shadow-sm');
@@ -813,7 +777,6 @@
         }
 
         function updateChibiMood() {
-            // Count confirmed attending records
             const confirmedList = appState.rsvps.filter(r => r.status === 'Attending');
             const count = confirmedList.reduce((sum, r) => sum + Number(r.guests), 0);
             
@@ -1083,12 +1046,40 @@
             }
         }
 
+        // DOWNLOAD EXPENSES AS EXCEL (.xlsx / CSV format)
+        function downloadExpensesXlsx() {
+            const totalSpent = appState.expenses.reduce((sum, e) => sum + Number(e.amount), 0);
+            const participantsSet = new Set();
+            appState.rsvps.filter(r => r.status === 'Attending').forEach(r => participantsSet.add(r.name));
+            appState.expenses.forEach(e => participantsSet.add(e.payer));
+            const participantCount = Math.max(1, participantsSet.size);
+            const perPerson = totalSpent / participantCount;
+
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "ISD Sojitz BBQ Expense Ledger\n\n";
+            csvContent += "Description,Payer,Amount\n";
+            appState.expenses.forEach(e => {
+                csvContent += `"${e.desc}","${e.payer}",${Number(e.amount).toFixed(2)}\n`;
+            });
+            csvContent += `\nTotal Spent,,${totalSpent.toFixed(2)}\n`;
+            csvContent += `Participants,,${participantCount}\n`;
+            csvContent += `Cost Per Person,,${perPerson.toFixed(2)}\n`;
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "ISD_BBQ_Expenses_2026.xlsx");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast("Downloaded Expense Spreadsheet (.xlsx)!");
+        }
+
         function renderPlaylist() {
             const container = document.getElementById('songListContainer');
+            if(!container) return;
             document.getElementById('songCountBadge').innerText = `${appState.songs.length} tracks`;
-
             const sorted = [...appState.songs].sort((a, b) => b.votes - a.votes);
-
             container.innerHTML = sorted.map((s, idx) => `
                 <div class="bg-white p-4 rounded-2xl border border-wood-200 flex items-center justify-between gap-4 shadow-sm">
                     <div class="flex items-center gap-3">
@@ -1123,9 +1114,6 @@
 
         function openExpenseModal() { document.getElementById('expenseModal').classList.remove('hidden'); document.getElementById('expenseModal').classList.add('flex'); }
         function closeExpenseModal() { document.getElementById('expenseModal').classList.remove('flex'); document.getElementById('expenseModal').classList.add('hidden'); document.getElementById('expenseForm').reset(); }
-
-        function openSongModal() { document.getElementById('songModal').classList.remove('hidden'); document.getElementById('songModal').classList.add('flex'); }
-        function closeSongModal() { document.getElementById('songModal').classList.remove('flex'); document.getElementById('songModal').classList.add('hidden'); document.getElementById('songForm').reset(); }
 
         function handleVoteSubmit(e) {
             e.preventDefault();
@@ -1227,22 +1215,6 @@
             showToast('Receipt removed.');
         }
 
-        function handleSongSubmit(e) {
-            e.preventDefault();
-            const title = document.getElementById('songTitle').value.trim();
-            const artist = document.getElementById('songArtist').value.trim();
-            const suggester = document.getElementById('songSuggester').value.trim();
-
-            if (!title || !artist || !suggester) return;
-
-            appState.songs.push({ id: Date.now(), title, artist, suggester, votes: 1 });
-
-            saveStorage();
-            closeSongModal();
-            renderAll();
-            showToast('Track added to queue!');
-        }
-
         function upvoteSong(idx) {
             appState.songs[idx].votes++;
             saveStorage();
@@ -1276,12 +1248,16 @@
 
         window.onload = function() {
             loadStorage();
-            if (localStorage.getItem('sojitz_isd_auth') === 'true') {
+            // Using sessionStorage so closing browser tab/window always requires password verification again
+            if (sessionStorage.getItem('sojitz_isd_auth') === 'true') {
                 document.getElementById('passwordGate').classList.add('hidden');
                 const main = document.getElementById('mainApp');
                 main.classList.remove('hidden');
                 main.classList.remove('opacity-0');
-                renderAll();
+                
+                // Remember active tab on refresh
+                const lastTab = sessionStorage.getItem('sojitz_active_tab') || 'overview';
+                switchTab(lastTab);
             }
         };
     </script>
