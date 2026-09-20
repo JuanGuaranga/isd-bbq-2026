@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISD Sojitz BBQ Central | Minimalist Zen Edition</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Noto Sans JP', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    },
+                    colors: {
+                        wood: {
+                            50: '#fcfaf5',
+                            100: '#f5edd9',
+                            200: '#e8d5b5',
+                            300: '#d4b382',
+                            400: '#b8905b',
+                            500: '#9c7343',
+                            600: '#7d5932',
+                            700: '#614427',
+                            800: '#4a331e',
+                            900: '#302113',
+                        },
+                        zen: {
+                            bg: '#fbf9f4',
+                            card: '#ffffff',
+                            border: '#e8e2d5',
+                            text: '#2d2926',
+                            muted: '#736b63',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif; background-color: #fbf9f4; color: #2d2926; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        .custom-bg-image {
+            background-color: #fbf9f4;
+            background-image: linear-gradient(rgba(251, 249, 244, 0.55), rgba(251, 249, 244, 0.55)), url('https://www.vantagejc.com/wp-content/uploads/2022/02/joey-pedras-z02wlrl3PhM-unsplash-1024x683.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .zen-shadow {
+            box-shadow: 0 12px 32px -6px rgba(125, 89, 50, 0.08), 0 4px 6px -2px rgba(45, 41, 38, 0.03);
+        }
+        .zen-card {
+            background: #ffffff;
+            border: 1px solid #e8e2d5;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.04); }
+        }
+        .animate-glow {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="min-h-full flex flex-col antialiased custom-bg-image relative">
+
+    <!-- STRICT PASSWORD GATE OVERLAY -->
+    <div id="passwordGate" class="fixed inset-0 z-50 bg-[#fbf9f4] flex items-center justify-center p-4 sm:p-6 transition-opacity duration-700">
+        <div class="absolute inset-0 custom-bg-image opacity-60 pointer-events-none"></div>
+        
+        <div class="absolute w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-wood-200/40 blur-3xl -top-12 -left-12 animate-glow pointer-events-none"></div>
+        <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-amber-100/50 blur-3xl -bottom-12 -right-12 animate-glow pointer-events-none" style="animation-delay: 2s;"></div>
+
+        <div class="relative z-10 max-w-md w-full bg-white/95 backdrop-blur-md border border-wood-200 rounded-3xl p-6 sm:p-8 zen-shadow text-center space-y-6">
+            
+            <div class="relative w-32 h-32 sm:w-36 sm:h-36 mx-auto flex items-center justify-center bg-wood-50 rounded-full border border-wood-200 animate-float">
+                <svg class="w-24 h-24 sm:w-28 sm:h-28 drop-shadow-sm" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="35" y="65" width="50" height="25" rx="6" fill="#4a331e"/>
+                    <path d="M42 65L45 50H75L78 65" fill="#7d5932"/>
+                    <line x1="42" y1="90" x2="32" y2="108" stroke="#302113" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="78" y1="90" x2="88" y2="108" stroke="#302113" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="40" y1="58" x2="80" y2="58" stroke="#d4b382" stroke-width="2"/>
+                    <line x1="50" y1="58" x2="50" y2="42" stroke="#4a331e" stroke-width="1.5"/>
+                    <circle cx="50" cy="46" r="4" fill="#9c7343"/>
+                    <circle cx="50" cy="52" r="4.5" fill="#614427"/>
+                    <line x1="70" y1="58" x2="70" y2="40" stroke="#4a331e" stroke-width="1.5"/>
+                    <circle cx="70" cy="44" r="4" fill="#9c7343"/>
+                    <circle cx="70" cy="51" r="4.5" fill="#614427"/>
+                    <path d="M55 35C55 30 60 28 58 23C56 18 62 14 60 10" stroke="#b8905b" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                    <path d="M68 32C68 28 72 26 70 22" stroke="#b8905b" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                    <circle cx="28" cy="45" r="3" fill="#d4b382" opacity="0.8"/>
+                    <circle cx="92" cy="55" r="2.5" fill="#d4b382" opacity="0.8"/>
+                </svg>
+            </div>
+
+            <div>
+                <div class="inline-flex items-center gap-2 bg-wood-100 text-wood-800 px-3 py-1 rounded-full text-xs font-mono font-semibold mb-2 border border-wood-200">
+                    <i class="fa-solid fa-lock text-[10px]"></i> ISD BBQ Portal
+                </div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-stone-900 tracking-tight">ISD BBQ Central 2026</h2>
+                <p class="text-xs text-stone-600 mt-1">Please enter department access password to view the Liberty State Park gathering hub.</p>
+            </div>
+
+            <form onsubmit="handlePasswordSubmit(event)" class="space-y-4">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-stone-400">
+                        <i class="fa-solid fa-key"></i>
+                    </span>
+                    <input type="password" id="passwordInput" required placeholder="Enter password" class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900 font-mono tracking-wider transition-all">
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-wood-800 hover:bg-wood-900 text-white font-bold rounded-2xl text-sm shadow-md transition-all flex items-center justify-center gap-2">
+                    <span>Enter BBQ Central</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+            <div id="passwordError" class="text-xs text-rose-600 font-mono hidden">
+                Incorrect password. Hint: Helpdesk2026
+            </div>
+            <div class="text-[11px] text-stone-400 font-mono pt-2">
+                Information Systems Department &bull; Tokyo HQ & NY Branch
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APPLICATION CONTAINER -->
+    <div id="mainApp" class="flex flex-col flex-grow w-full opacity-0 transition-opacity duration-1000 hidden">
+
+        <header class="bg-white/90 backdrop-blur-md border-b border-zen-border sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-wood-200 border border-wood-300 flex items-center justify-center text-wood-900 font-mono font-bold text-lg shadow-sm shrink-0">
+                            ISD
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="text-[10px] sm:text-[11px] uppercase font-mono tracking-wider text-wood-700 font-semibold">Information Systems Department</span>
+                                <span class="text-[9px] sm:text-[10px] bg-wood-100 text-wood-900 px-2 py-0.5 rounded-full font-mono border border-wood-200">SCA</span>
+                            </div>
+                            <h1 class="text-lg sm:text-2xl font-extrabold tracking-tight text-stone-900 flex items-center gap-2">
+                                BBQ <span class="text-[10px] sm:text-xs font-mono bg-wood-50 text-wood-800 border border-wood-200 px-2 py-0.5 rounded-full">Oct 2026 🪵✨</span>
+                            </h1>
+                        </div>
+                    </div>
+                    <button onclick="lockApp()" class="sm:hidden w-10 h-10 rounded-xl bg-white hover:bg-wood-50 border border-wood-200 text-stone-600 flex items-center justify-center text-sm shadow-sm transition-all shrink-0" title="Lock Portal">
+                        <i class="fa-solid fa-lock"></i>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+                    <div class="zen-card rounded-2xl px-4 py-2 text-xs flex items-center gap-3 shadow-sm w-full sm:w-auto justify-between sm:justify-start">
+                        <div>
+                            <div class="text-stone-400 font-mono text-[10px]">VENUE</div>
+                            <div class="font-bold text-stone-800 text-xs sm:text-sm">Liberty State Park (Pesin Dr)</div>
+                        </div>
+                        <div class="h-6 w-px bg-stone-200 shrink-0"></div>
+                        <div>
+                            <div class="text-stone-400 font-mono text-[10px]">STATUS</div>
+                            <div id="headerRsvpSummary" class="font-bold text-wood-800 text-xs sm:text-sm">0 Attending</div>
+                        </div>
+                    </div>
+                    <button onclick="lockApp()" class="hidden sm:flex w-10 h-10 rounded-2xl bg-white hover:bg-wood-50 border border-wood-200 text-stone-600 items-center justify-center text-sm shadow-sm transition-all shrink-0" title="Lock Portal">
+                        <i class="fa-solid fa-lock"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <nav class="bg-white/90 backdrop-blur-md border-b border-zen-border sticky top-[73px] sm:top-[81px] z-30 shadow-sm overflow-x-auto no-scrollbar">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex space-x-2 py-3 min-w-max" id="navTabs">
+                    <button onclick="switchTab('overview')" class="nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-stone-600 hover:bg-wood-50 hover:text-stone-900 whitespace-nowrap">
+                        <i class="fa-solid fa-house-chimney"></i> Overview / 概要
+                    </button>
+                    <button onclick="switchTab('voting')" class="nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-stone-600 hover:bg-wood-50 hover:text-stone-900 whitespace-nowrap">
+                        <i class="fa-solid fa-calendar-days"></i> October Date Poll / 日程投票
+                    </button>
+                    <button onclick="switchTab('menu')" class="nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-stone-600 hover:bg-wood-50 hover:text-stone-900 whitespace-nowrap">
+                        <i class="fa-solid fa-utensils"></i> Bento & Grill / 持ち寄り
+                    </button>
+                    <button onclick="switchTab('expenses')" class="nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-stone-600 hover:bg-wood-50 hover:text-stone-900 whitespace-nowrap">
+                        <i class="fa-solid fa-receipt"></i> Expense Ledger / 経費精算
+                    </button>
+                    <button onclick="switchTab('location')" class="nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-stone-600 hover:bg-wood-50 hover:text-stone-900 whitespace-nowrap">
+                        <i class="fa-solid fa-map-location-dot"></i> Map & Route / アクセス
+                    </button>
+                    <!--<button onclick="switchTab('activities')" class="nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-stone-600 hover:bg-wood-50 hover:text-stone-900 whitespace-nowrap">
+                        <i class="fa-solid fa-music"></i> Activities & Jam / アクティビティ
+                    </button>-->
+                </div>
+            </div>
+        </nav>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-grow w-full space-y-8">
+
+            <!-- TAB 1: OVERVIEW -->
+            <div id="tab-overview" class="tab-content active space-y-8">
+                <div class="relative rounded-3xl overflow-hidden zen-card zen-shadow p-6 sm:p-10 bg-gradient-to-br from-white via-wood-50/50 to-wood-100/40 border border-wood-200">
+                    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                        <div class="lg:col-span-2 space-y-4">
+                            <div class="inline-flex items-center gap-2 bg-wood-100 border border-wood-300 text-wood-900 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider font-semibold">
+                                <i class="fa-solid fa-seedling"><span>ISD Gathering 2026</span></i>
+                            </div>
+                            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-stone-900">
+                                Come, Share , Enjoy 🌳✨
+                            </h2>
+                            <p class="text-stone-600 text-xs sm:text-base leading-relaxed">
+                                Welcome, Information Systems Department team! It has been a while since our last wonderful outing, we are returning to the peaceful <strong>Liberty State Park</strong>. Use this hub to vote on October Saturdays, coordinate potluck items, split expenses, and check out travel routes.
+                            </p>
+                            
+                            <div class="pt-2 flex flex-wrap gap-3">
+                                <button onclick="switchTab('voting')" class="px-5 py-3 bg-wood-800 hover:bg-wood-900 text-white font-bold rounded-2xl shadow-md text-xs sm:text-sm transition-all flex items-center gap-2">
+                                    <i class="fa-regular fa-calendar-days"></i> Vote Date Now
+                                </button>
+                                <button onclick="switchTab('menu')" class="px-5 py-3 bg-white hover:bg-wood-50 text-stone-800 font-semibold rounded-2xl border border-wood-300 text-xs sm:text-sm transition-all flex items-center gap-2 shadow-sm">
+                                    <i class="fa-solid fa-utensils"></i> Claim Bento / Potluck
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Custom Chibi Tech Workers SVG Illustration Box -->
+                        <div class="bg-white/90 backdrop-blur-md rounded-2xl border border-wood-200 p-6 flex flex-col items-center justify-center text-center shadow-sm">
+                            <h3 class="text-xs font-semibold uppercase tracking-wider text-wood-600 mb-3">BBQ Attending Radar</h3>
+                            
+                            <div id="chibiContainer" class="w-28 h-28 mb-3 transition-all duration-300 transform hover:scale-105">
+                                <!-- Dynamic Chibi SVG -->
+                            </div>
+                        
+                            <div id="chibiStatusBadge" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-1 bg-amber-100 text-amber-800">
+                                Loading mood...
+                            </div>
+                            <p id="chibiMessage" class="text-xs text-wood-600">Checking headcount...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div onclick="switchTab('voting')" class="zen-card zen-shadow hover:border-wood-400 rounded-3xl p-6 transition-all cursor-pointer group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-wood-100 text-wood-900 border border-wood-200 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+                                <i class="fa-solid fa-calendar-check"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-stone-900">October Saturday Poll</h3>
+                            <p class="text-xs text-stone-600 mt-1">Vote on Saturdays in October (Oct 3, 10, 17, 24, 31). Live tally reflects team availability.</p>
+                        </div>
+                        <div class="mt-6 flex items-center gap-2 text-xs font-mono text-wood-800 group-hover:translate-x-1 transition-transform">
+                            Cast your vote <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <div onclick="switchTab('menu')" class="zen-card zen-shadow hover:border-wood-400 rounded-3xl p-6 transition-all cursor-pointer group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-wood-100 text-wood-900 border border-wood-200 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+                                <i class="fa-solid fa-utensils"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-stone-900">Bento & Grill Menu</h3>
+                            <p class="text-xs text-stone-600 mt-1">Coordinate burgers, yakitori skewers, dietary preferences, and drinks in one place.</p>
+                        </div>
+                        <div class="mt-6 flex items-center gap-2 text-xs font-mono text-wood-800 group-hover:translate-x-1 transition-transform">
+                            View menu board <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <div onclick="switchTab('expenses')" class="zen-card zen-shadow hover:border-wood-400 rounded-3xl p-6 transition-all cursor-pointer group flex flex-col justify-between sm:col-span-2 lg:col-span-1">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-wood-100 text-wood-900 border border-wood-200 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+                                <i class="fa-solid fa-receipt"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-stone-900">Expense Ledger</h3>
+                            <p class="text-s text-stone-600 mt-1">Log receipts for groceries, permits, and supplies. Automatically calculates per-person splits.</p>
+                        </div>
+                        <div class="mt-6 flex items-center gap-2 text-xs font-mono text-wood-800 group-hover:translate-x-1 transition-transform">
+                            Open ledger <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: DATE VOTING -->
+            <div id="tab-voting" class="tab-content space-y-6">
+                <div class="zen-card zen-shadow rounded-3xl p-6 sm:p-8">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-zen-border">
+                        <div>
+                            <div class="text-xs font-mono text-wood-800 uppercase tracking-widest">Scheduling Protocol</div>
+                            <h2 class="text-2xl font-bold text-stone-900 mt-1">October 2026 Saturday Poll / 日程投票</h2>
+                            <p class="text-s text-stone-600 mt-1">Please select all Saturdays you can attend</p>
+                        </div>
+                        <button onclick="openVoteModal()" class="w-full sm:w-auto px-5 py-2.5 bg-wood-800 hover:bg-wood-900 text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-check-to-slot"></i> Cast / Update Vote
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-8" id="votingCardsContainer"></div>
+
+                    <div class="mt-10">
+                        <h3 class="text-base font-bold text-stone-900 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-users text-wood-800"></i> ISD Team Voter Log
+                        </h3>
+                        <div class="overflow-x-auto rounded-2xl border border-zen-border bg-white">
+                            <table class="w-full text-left text-xs sm:text-sm min-w-[500px]">
+                                <thead class="bg-wood-50 text-stone-600 font-mono border-b border-zen-border">
+                                    <tr>
+                                        <th class="p-4">Team Member / 氏名</th>
+                                        <th class="p-4">Available Saturdays / 投票日</th>
+                                        <th class="p-4 text-right">Action / 操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="votersTableBody" class="divide-y divide-stone-100"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: MENU & POTLUCK -->
+            <div id="tab-menu" class="tab-content space-y-6">
+                <div class="zen-card zen-shadow rounded-3xl p-6 sm:p-8">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-zen-border">
+                        <div>
+                            <div class="text-xs font-mono text-wood-800 uppercase tracking-widest">American BBQ & Izakaya Fusion</div>
+                            <h2 class="text-2xl font-bold text-stone-900 mt-1">Bento & Grill Menu Board / 持ち寄りボード</h2>
+                            <p class="text-s text-stone-600 mt-1">Confirm your RSVP headcount, dietary preferences, and what delicious items you are bringing.</p>
+                        </div>
+                        <button onclick="openRsvpModal()" class="w-full sm:w-auto px-5 py-2.5 bg-wood-800 hover:bg-wood-900 text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-user-plus"></i> RSVP & Bring Item
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 my-6">
+                        <div class="bg-wood-50 p-4 rounded-2xl border border-wood-200">
+                            <div class="text-[10px] font-mono text-stone-500 uppercase">Total Headcount</div>
+                            <div id="statTotalHeadcount" class="text-2xl font-extrabold text-wood-900 mt-1 font-mono">0</div>
+                        </div>
+                        <div class="bg-wood-50 p-4 rounded-2xl border border-wood-200">
+                            <div class="text-[10px] font-mono text-stone-500 uppercase">Confirmed Attending</div>
+                            <div id="statConfirmedCount" class="text-2xl font-extrabold text-emerald-700 mt-1 font-mono">0</div>
+                        </div>
+                        <div class="bg-wood-50 p-4 rounded-2xl border border-wood-200">
+                            <div class="text-[10px] font-mono text-stone-500 uppercase">Menu Items Claimed</div>
+                            <div id="statPotluckCount" class="text-2xl font-extrabold text-amber-700 mt-1 font-mono">0</div>
+                        </div>
+                        <div class="bg-wood-50 p-4 rounded-2xl border border-wood-200">
+                            <div class="text-[10px] font-mono text-stone-500 uppercase">Dietary Notes</div>
+                            <div id="statDietaryCount" class="text-2xl font-extrabold text-stone-800 mt-1 font-mono">0</div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-white p-5 rounded-2xl border border-wood-200 shadow-sm">
+                            <div class="flex items-center gap-2 text-wood-900 font-bold text-sm mb-2">
+                                <i class="fa-solid fa-fire-burner"></i> American Grill Classics
+                            </div>
+                            <p class="text-xs text-stone-600">Charcoal-grilled Angus beef patties, gourmet brioche buns, cheddar cheese, smoked beef ribs, potato salad, and chilled sodas.</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-wood-200 shadow-sm">
+                            <div class="flex items-center gap-2 text-wood-900 font-bold text-sm mb-2">
+                                <i class="fa-solid fa-bowl-rice"></i> Izakaya & Japanese Touch
+                            </div>
+                            <p class="text-xs text-stone-600">Teriyaki yakitori skewers, handmade onigiri, edamame, green tea mochi, and refreshing craft beverages.</p>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-2xl border border-zen-border bg-white">
+                        <table class="w-full text-left text-xs sm:text-sm min-w-[700px]">
+                            <thead class="bg-wood-50 text-stone-600 font-mono border-b border-zen-border">
+                                <tr>
+                                    <th class="p-4">Name / 氏名</th>
+                                    <th class="p-4">Status / 参加状況</th>
+                                    <th class="p-4">Guests / 同伴者</th>
+                                    <th class="p-4">Potluck / Bring Item / 持ち寄り品</th>
+                                    <th class="p-4">Dietary / アレルギー</th>
+                                    <th class="p-4 text-right">Actions / 操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rsvpTableBody" class="divide-y divide-stone-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: EXPENSES -->
+            <div id="tab-expenses" class="tab-content space-y-6">
+                <div class="zen-card zen-shadow rounded-3xl p-6 sm:p-8">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-zen-border">
+                        <div>
+                            <div class="text-xs font-mono text-wood-800 uppercase tracking-widest">Financial Settlement Protocol</div>
+                            <h2 class="text-2xl font-bold text-stone-900 mt-1">Expense & Settlement Ledger / 経費精算</h2>
+                            <p class="text-xs text-stone-600 mt-1">Log receipts for groceries, permits, and equipment. Automatically computes per-person splits.</p>
+                        </div>
+                        <button onclick="openExpenseModal()" class="w-full sm:w-auto px-5 py-2.5 bg-wood-800 hover:bg-wood-900 text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-receipt"></i> Log New Receipt
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 my-6">
+                        <div class="bg-wood-50 p-5 rounded-2xl border border-wood-200">
+                            <div class="text-[10px] font-mono text-stone-500 uppercase">Total Spent / 総額</div>
+                            <div id="expTotalSpent" class="text-3xl font-extrabold text-stone-900 mt-1 font-mono">$0.00</div>
+                        </div>
+                        <div class="bg-wood-50 p-5 rounded-2xl border border-wood-200">
+                            <div class="text-[10px] font-mono text-stone-500 uppercase">Participants in Split / 人数</div>
+                            <div id="expParticipantCount" class="text-3xl font-extrabold text-stone-800 mt-1 font-mono">0 people</div>
+                        </div>
+                        <div class="bg-wood-50 p-5 rounded-2xl border border-wood-300">
+                            <div class="text-[10px] font-mono text-wood-900 uppercase">Cost Per Person / 1人あたり</div>
+                            <div id="expPerPerson" class="text-3xl font-extrabold text-wood-900 mt-1 font-mono">$0.00</div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+                        <div>
+                            <h3 class="text-sm font-bold text-stone-900 mb-4 flex items-center gap-2 font-mono">
+                                <i class="fa-solid fa-list-check text-wood-800"></i> LOGGED RECEIPTS / レシート一覧
+                            </h3>
+                            <div class="overflow-x-auto rounded-2xl border border-zen-border bg-white">
+                                <table class="w-full text-left text-xs sm:text-sm min-w-[400px]">
+                                    <thead class="bg-wood-50 text-stone-600 font-mono border-b border-zen-border">
+                                        <tr>
+                                            <th class="p-3">Description / 摘要</th>
+                                            <th class="p-3">Payer / 支払者</th>
+                                            <th class="p-3">Amount / 金額</th>
+                                            <th class="p-3 text-right">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="expenseTableBody" class="divide-y divide-stone-100"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-sm font-bold text-stone-900 mb-4 flex items-center gap-2 font-mono">
+                                <i class="fa-solid fa-handshake text-wood-800"></i> SETTLEMENT TRANSACTIONS / 精算指示
+                            </h3>
+                            <div id="settlementContainer" class="space-y-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: LOCATION -->
+            <div id="tab-location" class="tab-content space-y-6">
+                <div class="zen-card zen-shadow rounded-3xl p-6 sm:p-8">
+                    <div class="pb-6 border-b border-zen-border">
+                        <div class="text-xs font-mono text-wood-800 uppercase tracking-widest">Venue Coordinate</div>
+                        <h2 class="text-2xl font-bold text-stone-900 mt-1">Liberty State Park / Pesin Dr Grove</h2>
+                        <p class="text-xs text-stone-600 mt-1">Our nostalgic picnic spot from 2 years ago! Breathtaking views of the Statue of Liberty and Manhattan skyline.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+                        <div class="lg:col-span-2 space-y-6">
+                            <div class="rounded-3xl overflow-hidden border border-wood-200 bg-wood-50 h-[320px] sm:h-[360px] relative flex flex-col items-center justify-center p-6 text-center">
+                                <div class="absolute inset-0 custom-bg-image opacity-40"></div>
+                                <div class="relative z-10 flex flex-col items-center">
+                                    <div class="w-16 h-16 rounded-2xl bg-wood-200 border border-wood-300 text-wood-900 flex items-center justify-center text-2xl shadow-sm mb-4 animate-bounce">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-stone-900">Pesin Drive Picnic Grove</h3>
+                                    <p class="text-xs text-stone-600 max-w-sm mt-1">Liberty State Park, Jersey City, NJ 07305</p>
+                                    <div class="mt-6 flex flex-wrap gap-3 justify-center">
+                                        <a href="https://maps.app.goo.gl/4Lfz7fyb1V8nyt729" target="_blank" class="px-6 py-3 bg-wood-800 hover:bg-wood-900 text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center gap-2">
+                                            <i class="fa-solid fa-map-marked-alt"></i> Open Google Maps Pin
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div class="bg-white p-4 rounded-2xl border border-wood-200 shadow-sm">
+                                    <div class="text-wood-900 font-bold text-sm mb-1 flex items-center gap-2"><i class="fa-solid fa-car"></i> By Car / 車</div>
+                                    <p class="text-xs text-stone-600">Take NJ Turnpike or I-78 to Liberty State Park exit. Follow signs toward Morris Pesin Drive and picnic grove parking lots.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-2xl border border-wood-200 shadow-sm">
+                                    <div class="text-wood-900 font-bold text-sm mb-1 flex items-center gap-2"><i class="fa-solid fa-train"></i> Transit / 公共交通</div>
+                                    <p class="text-xs text-stone-600">Take the Hudson-Bergen Light Rail to Liberty State Park Station, or NY Waterway ferry from Brookfield Place to LSP terminal.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-2xl border border-wood-200 shadow-sm">
+                                    <div class="text-wood-900 font-bold text-sm mb-1 flex items-center gap-2"><i class="fa-solid fa-square-parking"></i> Parking / 駐車場</div>
+                                    <p class="text-xs text-stone-600">Free/affordable parking lots available near Pesin Drive. Arrive by 11:00 AM to secure picnic tables together!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-wood-200 rounded-3xl p-6 flex flex-col justify-between shadow-sm">
+                            <div>
+                                <h3 class="text-sm font-bold text-stone-900 mb-4 flex items-center gap-2 font-mono text-wood-900">
+                                    <i class="fa-solid fa-circle-info"></i> PARK AMENITIES / 設備
+                                </h3>
+                                <ul class="space-y-3 text-xs text-stone-700">
+                                    <li class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                        <span>Built-in charcoal grills on site (bring your own charcoal & lighter fluid).</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                        <span>Spacious grassy lawns for soccer, frisbee, and cornhole games.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                        <span>Restrooms and water fountains conveniently located nearby.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-check text-emerald-600 mt-0.5"></i>
+                                        <span>Unbeatable views of the Manhattan skyline & Statue of Liberty.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mt-8 pt-4 border-t border-zen-border text-[11px] text-stone-500 text-center font-mono">
+                                💡 Tip: Bring camping chairs for extra seating comfort!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 6: ACTIVITIES & JAM -->
+            <div id="tab-activities" class="tab-content space-y-6">
+                <div class="zen-card zen-shadow rounded-3xl p-6 sm:p-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-sm font-bold text-stone-900 flex items-center gap-2 font-mono">
+                                    <i class="fa-solid fa-headphones text-wood-800"></i> ISD BBQ JAM QUEUE / プレイリスト
+                                </h3>
+                                <span id="songCountBadge" class="text-xs bg-wood-100 text-wood-900 border border-wood-200 px-2.5 py-0.5 rounded-full font-mono">0 tracks</span>
+                            </div>
+                            <div class="space-y-3" id="songListContainer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- MODALS -->
+        <div id="voteModal" class="fixed inset-0 z-50 bg-stone-900/40 backdrop-blur-sm hidden items-center justify-center p-4">
+            <div class="bg-white border border-wood-200 rounded-3xl max-w-md w-full p-6 sm:p-8 zen-shadow">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-bold text-stone-900 font-mono">Cast Date Vote / 日程投票</h3>
+                    <button onclick="closeVoteModal()" class="w-8 h-8 bg-stone-100 hover:bg-stone-200 rounded-full flex items-center justify-center text-stone-700">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <form id="voteForm" onsubmit="handleVoteSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Your Name / 氏名</label>
+                        <input type="text" id="voteName" required placeholder="e.g. Juan Guaranga" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-stone-500 mb-2">Select Available Saturdays / 希望日:</label>
+                        <div class="space-y-2.5" id="voteCheckboxGroup"></div>
+                    </div>
+                    <div class="pt-4 flex gap-3">
+                        <button type="button" onclick="closeVoteModal()" class="flex-1 py-3 bg-stone-100 hover:bg-stone-200 font-semibold rounded-xl text-xs text-stone-700 transition-all">Cancel</button>
+                        <button type="submit" class="flex-1 py-3 bg-wood-800 hover:bg-wood-900 font-bold rounded-xl text-xs text-white shadow-sm transition-all">Submit Vote</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="rsvpModal" class="fixed inset-0 z-50 bg-stone-900/40 backdrop-blur-sm hidden items-center justify-center p-4">
+            <div class="bg-white border border-wood-200 rounded-3xl max-w-md w-full p-6 sm:p-8 zen-shadow max-h-[90vh] overflow-y-auto">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-bold text-stone-900 font-mono">RSVP & Potluck / 参加登録</h3>
+                    <button onclick="closeRsvpModal()" class="w-8 h-8 bg-stone-100 hover:bg-stone-200 rounded-full flex items-center justify-center text-stone-700">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <form id="rsvpForm" onsubmit="handleRsvpSubmit(event)" class="space-y-4">
+                    <input type="hidden" id="rsvpEditIndex" value="-1">
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Your Name / 氏名</label>
+                        <input type="text" id="rsvpName" required placeholder="e.g. Emily Tanaka" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Status / 参加</label>
+                            <select id="rsvpStatus" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
+                                <option value="Attending">Attending 🎉</option>
+                                <option value="Maybe">Maybe 🤔</option>
+                                <option value="Not Attending">Can't Make It 😢</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Guests / 同伴者</label>
+                            <input type="number" id="rsvpGuests" min="1" max="10" value="1" required class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Potluck Item / Bring (Bento, Yakitori, Drinks)</label>
+                        <input type="text" id="rsvpPotluck" placeholder="e.g. Yakitori skewers, Onigiri, Cooler with drinks" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Dietary Restrictions / アレルギー</label>
+                        <input type="text" id="rsvpDietary" placeholder="e.g. Vegetarian, Gluten-free, None" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
+                    </div>
+                    <div class="pt-4 flex gap-3">
+                        <button type="button" onclick="closeRsvpModal()" class="flex-1 py-3 bg-stone-100 hover:bg-stone-200 font-semibold rounded-xl text-xs text-stone-700 transition-all">Cancel</button>
+                        <button type="submit" class="flex-1 py-3 bg-wood-800 hover:bg-wood-900 font-bold rounded-xl text-xs text-white shadow-sm transition-all">Save RSVP</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="expenseModal" class="fixed inset-0 z-50 bg-stone-900/40 backdrop-blur-sm hidden items-center justify-center p-4">
+            <div class="bg-white border border-wood-200 rounded-3xl max-w-md w-full p-6 sm:p-8 zen-shadow">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-bold text-stone-900 font-mono">Log Receipt / 経費登録</h3>
+                    <button onclick="closeExpenseModal()" class="w-8 h-8 bg-stone-100 hover:bg-stone-200 rounded-full flex items-center justify-center text-stone-700">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <form id="expenseForm" onsubmit="handleExpenseSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Description / 摘要</label>
+                        <input type="text" id="expDesc" required placeholder="e.g. Costco Wagyu Burgers & Skewers" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Payer / 支払者</label>
+                            <input type="text" id="expPayer" required placeholder="e.g. Juan Guaranga" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Amount ($) / 金額</label>
+                            <input type="number" step="0.01" min="0.01" id="expAmount" required placeholder="75.50" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
+                        </div>
+                    </div>
+                    <div class="pt-4 flex gap-3">
+                        <button type="button" onclick="closeExpenseModal()" class="flex-1 py-3 bg-stone-100 hover:bg-stone-200 font-semibold rounded-xl text-xs text-stone-700 transition-all">Cancel</button>
+                        <button type="submit" class="flex-1 py-3 bg-wood-800 hover:bg-wood-900 font-bold rounded-xl text-xs text-white shadow-sm transition-all">Add Receipt</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="songModal" class="fixed inset-0 z-50 bg-stone-900/40 backdrop-blur-sm hidden items-center justify-center p-4">
+            <div class="bg-white border border-wood-200 rounded-3xl max-w-md w-full p-6 sm:p-8 zen-shadow">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-bold text-stone-900 font-mono">Suggest Track / 曲の提案</h3>
+                    <button onclick="closeSongModal()" class="w-8 h-8 bg-stone-100 hover:bg-stone-200 rounded-full flex items-center justify-center text-stone-700">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <form id="songForm" onsubmit="handleSongSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Song Title / 曲名</label>
+                        <input type="text" id="songTitle" required placeholder="e.g. Plastic Love" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Artist / アーティスト</label>
+                        <input type="text" id="songArtist" required placeholder="e.g. Mariya Takeuchi" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-stone-500 mb-1">Suggested By / 提案者</label>
+                        <input type="text" id="songSuggester" required placeholder="e.g. Emily Tanaka" class="w-full px-4 py-3 rounded-xl bg-wood-50 border border-wood-200 focus:outline-none focus:border-wood-500 text-sm text-stone-900">
+                    </div>
+                    <div class="pt-4 flex gap-3">
+                        <button type="button" onclick="closeSongModal()" class="flex-1 py-3 bg-stone-100 hover:bg-stone-200 font-semibold rounded-xl text-xs text-stone-700 transition-all">Cancel</button>
+                        <button type="submit" class="flex-1 py-3 bg-wood-800 hover:bg-wood-900 font-bold rounded-xl text-xs text-white shadow-sm transition-all">Add to Queue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="toast" class="fixed bottom-6 right-6 z-50 bg-white border border-wood-200 text-stone-900 px-5 py-3 rounded-2xl zen-shadow transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3">
+            <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
+            <span id="toastMessage" class="text-xs font-mono font-medium">Action successful!</span>
+        </div>
+
+        <footer class="bg-white border-t border-zen-border text-stone-500 py-8 mt-auto">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-1 font-mono">
+                <p>Sojitz Corporation of America &bull; Information Systems Department (ISD) BBQ Central</p>
+                <p class="text-stone-400">Liberty State Park (Pesin Dr Grove) &bull; October 2026</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const saturdayDates = [
+            { id: 'oct3', label: 'Oct 3, 2026', subtitle: 'First Saturday / 初週' },
+            { id: 'oct10', label: 'Oct 10, 2026', subtitle: 'Columbus Weekend / 3連休' },
+            { id: 'oct17', label: 'Oct 17, 2026', subtitle: 'Mid-October / 中旬' },
+            { id: 'oct24', label: 'Oct 24, 2026', subtitle: 'Autumn Peak / 深秋' },
+            { id: 'oct31', label: 'Oct 31, 2026', subtitle: 'Halloween Saturday / 月末' }
+        ];
+
+        let appState = {
+            votes: [
+                { name: 'Juan Guaranga', dates: ['oct17', 'oct24'] },
+                { name: 'Emily Tanaka', dates: ['oct10', 'oct17'] },
+                { name: 'David Miller', dates: ['oct17', 'oct31'] },
+                { name: 'Yuki Takahashi', dates: ['oct3', 'oct17'] }
+            ],
+            rsvps: [
+                { id: 1, name: 'Juan Guaranga', status: 'Attending', guests: 2, potluck: 'Yakitori skewers & charcoal', dietary: 'None' },
+                { id: 2, name: 'Emily Tanaka', status: 'Attending', guests: 1, potluck: 'Homemade Onigiri & green tea', dietary: 'Vegetarian' },
+                { id: 3, name: 'David Miller', status: 'Attending', guests: 3, potluck: 'Angus beef patties & brioche buns', dietary: 'None' },
+                { id: 4, name: 'Yuki Takahashi', status: 'Attending', guests: 1, potluck: 'Cooler with iced craft beverages', dietary: 'None' },
+                { id: 5, name: 'Sarah Jenkins', status: 'Maybe', guests: 2, potluck: 'Paper plates & napkins', dietary: 'Gluten-free' }
+            ],
+            expenses: [
+                { id: 1, desc: 'Costco Wagyu Patties & Buns', payer: 'David Miller', amount: 92.50 },
+                { id: 2, desc: 'Izakaya Skewers & Marinade', payer: 'Juan Guaranga', amount: 48.00 },
+                { id: 3, desc: 'Plates, Cups & Grill Tools', payer: 'Sarah Jenkins', amount: 24.50 }
+            ],
+            songs: [
+                { id: 1, title: 'Plastic Love', artist: 'Mariya Takeuchi', suggester: 'Emily Tanaka', votes: 6 },
+                { id: 2, title: 'September', artist: 'Earth, Wind & Fire', suggester: 'Juan Guaranga', votes: 5 },
+                { id: 3, title: 'Uptown Funk', artist: 'Mark Ronson ft. Bruno Mars', suggester: 'David Miller', votes: 4 }
+            ]
+        };
+
+        function loadStorage() {
+            const saved = localStorage.getItem('sojitz_isd_bbq_minimalist_2026');
+            if (saved) {
+                try {
+                    appState = JSON.parse(saved);
+                } catch(e) { console.error(e); }
+            }
+        }
+
+        function saveStorage() {
+            localStorage.setItem('sojitz_isd_bbq_minimalist_2026', JSON.stringify(appState));
+        }
+
+        function handlePasswordSubmit(e) {
+            e.preventDefault();
+            const val = document.getElementById('passwordInput').value.trim();
+            const errEl = document.getElementById('passwordError');
+
+            if (val === 'Helpdesk2026') {
+                errEl.classList.add('hidden');
+                const gate = document.getElementById('passwordGate');
+                gate.style.opacity = '0';
+                setTimeout(() => {
+                    gate.classList.add('hidden');
+                    const main = document.getElementById('mainApp');
+                    main.classList.remove('hidden');
+                    setTimeout(() => main.classList.remove('opacity-0'), 50);
+                    localStorage.setItem('sojitz_isd_auth', 'true');
+                    renderAll();
+                }, 500);
+            } else {
+                errEl.classList.remove('hidden');
+                document.getElementById('passwordInput').classList.add('border-rose-500');
+            }
+        }
+
+        function lockApp() {
+            localStorage.removeItem('sojitz_isd_auth');
+            location.reload();
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(el => {
+                el.classList.remove('bg-wood-800', 'text-white', 'shadow-sm');
+                el.classList.add('text-stone-600', 'hover:bg-wood-50', 'hover:text-stone-900');
+            });
+
+            const target = document.getElementById('tab-' + tabId);
+            if (target) target.classList.add('active');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.getAttribute('onclick').includes(tabId)) {
+                    btn.classList.add('bg-wood-800', 'text-white', 'shadow-sm');
+                    btn.classList.remove('text-stone-600', 'hover:bg-wood-50', 'hover:text-stone-900');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            renderAll();
+        }
+
+        function renderAll() {
+            renderOverview();
+            renderVoting();
+            renderRsvp();
+            renderExpenses();
+            renderPlaylist();
+            renderVoteCheckboxes();
+            updateChibiMood();
+        }
+
+        function renderOverview() {
+            const totalAttending = appState.rsvps
+                .filter(r => r.status === 'Attending')
+                .reduce((sum, r) => sum + Number(r.guests), 0);
+            document.getElementById('headerRsvpSummary').innerText = `${totalAttending} Attending`;
+        }
+
+        function updateChibiMood() {
+            // Count confirmed attending records
+            const confirmedList = appState.rsvps.filter(r => r.status === 'Attending');
+            const count = confirmedList.reduce((sum, r) => sum + Number(r.guests), 0);
+            
+            const container = document.getElementById('chibiContainer');
+            const badge = document.getElementById('chibiStatusBadge');
+            const message = document.getElementById('chibiMessage');
+
+            if (!container || !badge || !message) return;
+
+            if (count <= 2) {
+                badge.className = "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-1 bg-blue-100 text-blue-800";
+                badge.textContent = "Lonely Grill 😢";
+                message.textContent = "We need more teammates! Register now in Bento & Grill TAB...";
+                
+                container.innerHTML = `
+                    <svg viewBox="0 0 120 120" class="w-full h-full drop-shadow-md">
+                        <path d="M40 100 C40 85 45 75 60 75 C75 75 80 85 80 100 Z" fill="#4a331e"/>
+                        <path d="M45 100 L45 82 C52 80 68 80 75 82 L75 100 Z" fill="#fbf9f4"/>
+                        <circle cx="60" cy="50" r="22" fill="#ffd1b3"/>
+                        <path d="M50 48 Q53 45 56 48" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        <path d="M64 48 Q67 45 70 48" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        <path d="M54 62 Q60 56 66 62" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        <path d="M48 53 Q50 58 48 60 Q46 58 48 53" fill="#60a5fa"/>
+                        <rect x="35" y="90" width="50" height="20" rx="3" fill="#9ca3af"/>
+                        <polygon points="30,110 90,110 95,115 25,115" fill="#4b5563"/>
+                    </svg>
+                `;
+            } else if (count > 2 && count <= 5) {
+                badge.className = "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-1 bg-amber-100 text-amber-800";
+                badge.textContent = "Steady Crew 😐";
+                message.textContent = "Getting a small team together...";
+                
+                container.innerHTML = `
+                    <svg viewBox="0 0 120 120" class="w-full h-full drop-shadow-md">
+                        <path d="M40 100 C40 85 45 75 60 75 C75 75 80 85 80 100 Z" fill="#7d5932"/>
+                        <path d="M45 100 L45 82 C52 80 68 80 75 82 L75 100 Z" fill="#fbf9f4"/>
+                        <circle cx="60" cy="50" r="22" fill="#ffd1b3"/>
+                        <circle cx="53" cy="48" r="3" fill="#333"/>
+                        <circle cx="67" cy="48" r="3" fill="#333"/>
+                        <line x1="54" y1="59" x2="66" y2="59" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+                        <rect x="35" y="90" width="50" height="20" rx="3" fill="#9ca3af"/>
+                        <polygon points="30,110 90,110 95,115 25,115" fill="#4b5563"/>
+                    </svg>
+                `;
+            } else {
+                badge.className = "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-1 bg-emerald-100 text-emerald-800";
+                badge.textContent = "Full ISD Rollout! 😄🎉";
+                message.textContent = "Let's enjoy a nice outing!";
+                
+                container.innerHTML = `
+                    <svg viewBox="0 0 120 120" class="w-full h-full drop-shadow-md">
+                        <path d="M40 100 C40 85 45 75 60 75 C75 75 80 85 80 100 Z" fill="#4a331e"/>
+                        <path d="M45 100 L45 82 C52 80 68 80 75 82 L75 100 Z" fill="#fbf9f4"/>
+                        <circle cx="60" cy="50" r="22" fill="#ffd1b3"/>
+                        <path d="M50 46 L56 50 L50 54 Z" fill="#333"/>
+                        <path d="M70 46 L64 50 L70 54 Z" fill="#333"/>
+                        <path d="M53 57 Q60 66 67 57" stroke="#333" stroke-width="2" fill="#fca5a5" stroke-linecap="round"/>
+                        <circle cx="47" cy="53" r="3" fill="#f87171" opacity="0.6"/>
+                        <circle cx="73" cy="53" r="3" fill="#f87171" opacity="0.6"/>
+                        <circle cx="30" cy="30" r="2" fill="#fbbf24"/>
+                        <circle cx="90" cy="35" r="2.5" fill="#f43f5e"/>
+                        <circle cx="85" cy="70" r="2" fill="#38bdf8"/>
+                        <rect x="35" y="90" width="50" height="20" rx="3" fill="#9ca3af"/>
+                        <polygon points="30,110 90,110 95,115 25,115" fill="#4b5563"/>
+                    </svg>
+                `;
+            }
+        }
+
+        function renderVoting() {
+            const counts = {};
+            saturdayDates.forEach(d => counts[d.id] = 0);
+            appState.votes.forEach(v => {
+                v.dates.forEach(dId => {
+                    if (counts[dId] !== undefined) counts[dId]++;
+                });
+            });
+
+            const totalVoters = appState.votes.length || 1;
+
+            const container = document.getElementById('votingCardsContainer');
+            container.innerHTML = saturdayDates.map(d => {
+                const count = counts[d.id];
+                const pct = Math.round((count / totalVoters) * 100);
+                return `
+                    <div class="bg-white border border-wood-200 rounded-2xl p-5 flex flex-col justify-between shadow-sm">
+                        <div>
+                            <div class="text-[10px] font-mono text-wood-800 uppercase tracking-widest">${d.subtitle}</div>
+                            <div class="text-lg font-bold text-stone-900 mt-1">${d.label}</div>
+                        </div>
+                        <div class="mt-6">
+                            <div class="flex justify-between text-xs font-mono text-stone-500 mb-1">
+                                <span>Votes</span>
+                                <span class="text-wood-900 font-bold">${count} (${pct}%)</span>
+                            </div>
+                            <div class="w-full bg-wood-100 h-2 rounded-full overflow-hidden border border-wood-200">
+                                <div class="bg-wood-700 h-full rounded-full transition-all duration-500" style="width: ${pct}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const tbody = document.getElementById('votersTableBody');
+            if (appState.votes.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" class="p-6 text-center text-stone-400 font-mono">No votes recorded yet.</td></tr>`;
+            } else {
+                tbody.innerHTML = appState.votes.map((v, idx) => {
+                    const dateTags = v.dates.map(dId => {
+                        const dObj = saturdayDates.find(x => x.id === dId);
+                        return dObj ? `<span class="inline-block bg-wood-50 border border-wood-200 text-wood-900 text-xs px-2.5 py-1 rounded-lg font-mono mr-1 mb-1">${dObj.label}</span>` : '';
+                    }).join('');
+                    return `
+                        <tr class="hover:bg-wood-50/50">
+                            <td class="p-4 font-bold text-stone-900">${v.name}</td>
+                            <td class="p-4">${dateTags || '<span class="text-stone-400 font-mono">None</span>'}</td>
+                            <td class="p-4 text-right">
+                                <button onclick="deleteVote(${idx})" class="text-stone-400 hover:text-red-600 p-2 rounded-lg transition-colors"><i class="fa-solid fa-trash-can"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+        }
+
+        function renderVoteCheckboxes() {
+            const group = document.getElementById('voteCheckboxGroup');
+            group.innerHTML = saturdayDates.map(d => `
+                <label class="flex items-center gap-3 p-3 rounded-xl bg-wood-50 border border-wood-200 hover:bg-wood-100/50 cursor-pointer">
+                    <input type="checkbox" name="voteDate" value="${d.id}" class="w-4 h-4 text-wood-800 rounded bg-white border-wood-300">
+                    <div>
+                        <div class="text-sm font-bold text-stone-900">${d.label}</div>
+                        <div class="text-xs text-stone-500 font-mono">${d.subtitle}</div>
+                    </div>
+                </label>
+            `).join('');
+        }
+
+        function renderRsvp() {
+            const totalHeadcount = appState.rsvps
+                .filter(r => r.status === 'Attending')
+                .reduce((sum, r) => sum + Number(r.guests), 0);
+            const confirmedCount = appState.rsvps.filter(r => r.status === 'Attending').length;
+            const potluckCount = appState.rsvps.filter(r => r.potluck && r.potluck.trim() !== '').length;
+            const dietaryCount = appState.rsvps.filter(r => r.dietary && r.dietary.toLowerCase() !== 'none' && r.dietary.trim() !== '').length;
+
+            document.getElementById('statTotalHeadcount').innerText = totalHeadcount;
+            document.getElementById('statConfirmedCount').innerText = confirmedCount;
+            document.getElementById('statPotluckCount').innerText = potluckCount;
+            document.getElementById('statDietaryCount').innerText = dietaryCount;
+
+            const tbody = document.getElementById('rsvpTableBody');
+            if (appState.rsvps.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-stone-400 font-mono">No RSVPs recorded yet.</td></tr>`;
+            } else {
+                tbody.innerHTML = appState.rsvps.map((r, idx) => {
+                    let badge = '';
+                    if (r.status === 'Attending') badge = '<span class="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-mono font-semibold">Attending 🎉</span>';
+                    else if (r.status === 'Maybe') badge = '<span class="bg-amber-50 border border-amber-200 text-amber-800 text-xs px-2.5 py-1 rounded-full font-mono font-semibold">Maybe 🤔</span>';
+                    else badge = '<span class="bg-rose-50 border border-rose-200 text-rose-800 text-xs px-2.5 py-1 rounded-full font-mono font-semibold">Can\'t Go 😢</span>';
+
+                    return `
+                        <tr class="hover:bg-wood-50/50">
+                            <td class="p-4 font-bold text-stone-900">${r.name}</td>
+                            <td class="p-4">${badge}</td>
+                            <td class="p-4 text-stone-700 font-mono">${r.guests}</td>
+                            <td class="p-4 text-stone-700">${r.potluck || '<span class="text-stone-400 italic">None</span>'}</td>
+                            <td class="p-4 text-stone-700">${r.dietary && r.dietary.toLowerCase() !== 'none' ? `<span class="bg-wood-100 text-wood-900 border border-wood-200 text-xs px-2 py-0.5 rounded-md font-mono">${r.dietary}</span>` : '<span class="text-stone-400">None</span>'}</td>
+                            <td class="p-4 text-right space-x-1">
+                                <button onclick="editRsvp(${idx})" class="text-stone-400 hover:text-wood-800 p-2 rounded-lg transition-colors"><i class="fa-solid fa-pen"></i></button>
+                                <button onclick="deleteRsvp(${idx})" class="text-stone-400 hover:text-red-600 p-2 rounded-lg transition-colors"><i class="fa-solid fa-trash-can"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+        }
+
+        function renderExpenses() {
+            const totalSpent = appState.expenses.reduce((sum, e) => sum + Number(e.amount), 0);
+            
+            const participantsSet = new Set();
+            appState.rsvps.filter(r => r.status === 'Attending').forEach(r => participantsSet.add(r.name));
+            appState.expenses.forEach(e => participantsSet.add(e.payer));
+            const participantCount = Math.max(1, participantsSet.size);
+
+            const perPerson = totalSpent / participantCount;
+
+            document.getElementById('expTotalSpent').innerText = `$${totalSpent.toFixed(2)}`;
+            document.getElementById('expParticipantCount').innerText = `${participantCount} people`;
+            document.getElementById('expPerPerson').innerText = `$${perPerson.toFixed(2)}`;
+
+            const tbody = document.getElementById('expenseTableBody');
+            if (appState.expenses.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-stone-400 font-mono">No receipts logged yet.</td></tr>`;
+            } else {
+                tbody.innerHTML = appState.expenses.map((e, idx) => `
+                    <tr class="hover:bg-wood-50/50">
+                        <td class="p-3 font-bold text-stone-900">${e.desc}</td>
+                        <td class="p-3 text-stone-700">${e.payer}</td>
+                        <td class="p-3 font-mono font-bold text-wood-900">$${Number(e.amount).toFixed(2)}</td>
+                        <td class="p-3 text-right">
+                            <button onclick="deleteExpense(${idx})" class="text-stone-400 hover:text-red-600 p-2 rounded-lg transition-colors"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            const paidMap = {};
+            participantsSet.forEach(p => paidMap[p] = 0);
+            appState.expenses.forEach(e => {
+                paidMap[e.payer] = (paidMap[e.payer] || 0) + Number(e.amount);
+            });
+
+            const balances = [];
+            participantsSet.forEach(person => {
+                const paid = paidMap[person] || 0;
+                const net = paid - perPerson;
+                balances.push({ name: person, net });
+            });
+
+            const settlementContainer = document.getElementById('settlementContainer');
+            if (appState.expenses.length === 0 || participantCount === 0) {
+                settlementContainer.innerHTML = `<div class="p-5 bg-wood-50 rounded-2xl border border-wood-200 text-center text-stone-500 text-xs font-mono">Log receipts and ensure RSVPs are marked 'Attending' to compute settlements.</div>`;
+                return;
+            }
+
+            let debtors = balances.filter(b => b.net < -0.01).map(b => ({ ...b }));
+            let creditors = balances.filter(b => b.net > 0.01).map(b => ({ ...b }));
+
+            debtors.sort((a, b) => a.net - b.net);
+            creditors.sort((a, b) => b.net - a.net);
+
+            let transactions = [];
+            let dIdx = 0, cIdx = 0;
+            while (dIdx < debtors.length && cIdx < creditors.length) {
+                let debtor = debtors[dIdx];
+                let creditor = creditors[cIdx];
+                let amount = Math.min(-debtor.net, creditor.net);
+
+                if (amount > 0.01) {
+                    transactions.push({ from: debtor.name, to: creditor.name, amount });
+                }
+
+                debtor.net += amount;
+                creditor.net -= amount;
+
+                if (Math.abs(debtor.net) < 0.01) dIdx++;
+                if (Math.abs(creditor.net) < 0.01) cIdx++;
+            }
+
+            if (transactions.length === 0) {
+                settlementContainer.innerHTML = `<div class="p-5 bg-emerald-50 rounded-2xl border border-emerald-200 text-center text-emerald-800 text-xs font-mono font-semibold">All accounts completely settled! 🎉</div>`;
+            } else {
+                settlementContainer.innerHTML = transactions.map(t => `
+                    <div class="bg-wood-50 p-4 rounded-2xl border border-wood-200 flex items-center justify-between text-xs shadow-sm">
+                        <div class="flex items-center gap-2 font-bold text-stone-900">
+                            <span>${t.from}</span>
+                            <i class="fa-solid fa-arrow-right text-wood-800 text-[10px]"></i>
+                            <span>${t.to}</span>
+                        </div>
+                        <div class="font-mono font-extrabold text-wood-900 bg-white border border-wood-200 px-3 py-1 rounded-xl shadow-sm">
+                            $${t.amount.toFixed(2)}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function renderPlaylist() {
+            const container = document.getElementById('songListContainer');
+            document.getElementById('songCountBadge').innerText = `${appState.songs.length} tracks`;
+
+            const sorted = [...appState.songs].sort((a, b) => b.votes - a.votes);
+
+            container.innerHTML = sorted.map((s, idx) => `
+                <div class="bg-white p-4 rounded-2xl border border-wood-200 flex items-center justify-between gap-4 shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-wood-100 text-wood-900 border border-wood-200 flex items-center justify-center font-mono font-bold text-xs shrink-0">
+                            #${idx + 1}
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-900 text-sm">${s.title}</h4>
+                            <p class="text-xs text-stone-500">by ${s.artist} &bull; Suggested by ${s.suggester}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button onclick="upvoteSong(${appState.songs.indexOf(s)})" class="px-3 py-1.5 bg-wood-50 border border-wood-200 hover:border-wood-400 hover:text-wood-900 rounded-xl text-xs font-mono font-bold transition-all flex items-center gap-1">
+                            <i class="fa-solid fa-fire text-amber-600"></i> ${s.votes}
+                        </button>
+                        <button onclick="deleteSong(${appState.songs.indexOf(s)})" class="text-stone-400 hover:text-red-600 p-2 text-xs"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openVoteModal() { document.getElementById('voteModal').classList.remove('hidden'); document.getElementById('voteModal').classList.add('flex'); }
+        function closeVoteModal() { document.getElementById('voteModal').classList.remove('flex'); document.getElementById('voteModal').classList.add('hidden'); document.getElementById('voteForm').reset(); }
+
+        function openRsvpModal() { 
+            document.getElementById('rsvpEditIndex').value = '-1';
+            document.getElementById('rsvpForm').reset();
+            document.getElementById('rsvpModal').classList.remove('hidden'); 
+            document.getElementById('rsvpModal').classList.add('flex'); 
+        }
+        function closeRsvpModal() { document.getElementById('rsvpModal').classList.remove('flex'); document.getElementById('rsvpModal').classList.add('hidden'); }
+
+        function openExpenseModal() { document.getElementById('expenseModal').classList.remove('hidden'); document.getElementById('expenseModal').classList.add('flex'); }
+        function closeExpenseModal() { document.getElementById('expenseModal').classList.remove('flex'); document.getElementById('expenseModal').classList.add('hidden'); document.getElementById('expenseForm').reset(); }
+
+        function openSongModal() { document.getElementById('songModal').classList.remove('hidden'); document.getElementById('songModal').classList.add('flex'); }
+        function closeSongModal() { document.getElementById('songModal').classList.remove('flex'); document.getElementById('songModal').classList.add('hidden'); document.getElementById('songForm').reset(); }
+
+        function handleVoteSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('voteName').value.trim();
+            const checkboxes = document.querySelectorAll('input[name="voteDate"]:checked');
+            const dates = Array.from(checkboxes).map(cb => cb.value);
+
+            if (!name) return;
+            if (dates.length === 0) {
+                showToast('Please select at least one Saturday date!', 'error');
+                return;
+            }
+
+            const existingIdx = appState.votes.findIndex(v => v.name.toLowerCase() === name.toLowerCase());
+            if (existingIdx >= 0) {
+                appState.votes[existingIdx].dates = dates;
+            } else {
+                appState.votes.push({ name, dates });
+            }
+
+            saveStorage();
+            closeVoteModal();
+            renderAll();
+            showToast(`Vote recorded for ${name}!`);
+        }
+
+        function deleteVote(idx) {
+            appState.votes.splice(idx, 1);
+            saveStorage();
+            renderAll();
+            showToast('Vote removed.');
+        }
+
+        function handleRsvpSubmit(e) {
+            e.preventDefault();
+            const editIdx = parseInt(document.getElementById('rsvpEditIndex').value);
+            const name = document.getElementById('rsvpName').value.trim();
+            const status = document.getElementById('rsvpStatus').value;
+            const guests = parseInt(document.getElementById('rsvpGuests').value) || 1;
+            const potluck = document.getElementById('rsvpPotluck').value.trim();
+            const dietary = document.getElementById('rsvpDietary').value.trim();
+
+            if (!name) return;
+
+            if (editIdx >= 0) {
+                appState.rsvps[editIdx] = { id: appState.rsvps[editIdx].id, name, status, guests, potluck, dietary };
+            } else {
+                const newId = appState.rsvps.length > 0 ? Math.max(...appState.rsvps.map(r => r.id)) + 1 : 1;
+                appState.rsvps.push({ id: newId, name, status, guests, potluck, dietary });
+            }
+
+            saveStorage();
+            closeRsvpModal();
+            renderAll();
+            showToast('RSVP saved successfully!');
+        }
+
+        function editRsvp(idx) {
+            const r = appState.rsvps[idx];
+            document.getElementById('rsvpEditIndex').value = idx;
+            document.getElementById('rsvpName').value = r.name;
+            document.getElementById('rsvpStatus').value = r.status;
+            document.getElementById('rsvpGuests').value = r.guests;
+            document.getElementById('rsvpPotluck').value = r.potluck || '';
+            document.getElementById('rsvpDietary').value = r.dietary || '';
+
+            document.getElementById('rsvpModal').classList.remove('hidden');
+            document.getElementById('rsvpModal').classList.add('flex');
+        }
+
+        function deleteRsvp(idx) {
+            appState.rsvps.splice(idx, 1);
+            saveStorage();
+            renderAll();
+            showToast('RSVP removed.');
+        }
+
+        function handleExpenseSubmit(e) {
+            e.preventDefault();
+            const desc = document.getElementById('expDesc').value.trim();
+            const payer = document.getElementById('expPayer').value.trim();
+            const amount = parseFloat(document.getElementById('expAmount').value);
+
+            if (!desc || !payer || isNaN(amount)) return;
+
+            const newId = appState.expenses.length > 0 ? Math.max(...appState.expenses.map(ex => ex.id)) + 1 : 1;
+            appState.expenses.push({ id: newId, desc, payer, amount });
+
+            saveStorage();
+            closeExpenseModal();
+            renderAll();
+            showToast('Receipt logged successfully!');
+        }
+
+        function deleteExpense(idx) {
+            appState.expenses.splice(idx, 1);
+            saveStorage();
+            renderAll();
+            showToast('Receipt removed.');
+        }
+
+        function handleSongSubmit(e) {
+            e.preventDefault();
+            const title = document.getElementById('songTitle').value.trim();
+            const artist = document.getElementById('songArtist').value.trim();
+            const suggester = document.getElementById('songSuggester').value.trim();
+
+            if (!title || !artist || !suggester) return;
+
+            appState.songs.push({ id: Date.now(), title, artist, suggester, votes: 1 });
+
+            saveStorage();
+            closeSongModal();
+            renderAll();
+            showToast('Track added to queue!');
+        }
+
+        function upvoteSong(idx) {
+            appState.songs[idx].votes++;
+            saveStorage();
+            renderAll();
+        }
+
+        function deleteSong(idx) {
+            appState.songs.splice(idx, 1);
+            saveStorage();
+            renderAll();
+            showToast('Track removed.');
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toastMessage');
+            const iconEl = document.getElementById('toastIcon');
+
+            msgEl.innerText = message;
+            if (type === 'error') {
+                iconEl.className = 'fa-solid fa-circle-exclamation text-rose-600 text-lg';
+            } else {
+                iconEl.className = 'fa-solid fa-circle-check text-emerald-600 text-lg';
+            }
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        window.onload = function() {
+            loadStorage();
+            if (localStorage.getItem('sojitz_isd_auth') === 'true') {
+                document.getElementById('passwordGate').classList.add('hidden');
+                const main = document.getElementById('mainApp');
+                main.classList.remove('hidden');
+                main.classList.remove('opacity-0');
+                renderAll();
+            }
+        };
+    </script>
+</body>
+</html>
