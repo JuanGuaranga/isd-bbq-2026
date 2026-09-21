@@ -12,6 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Firebase SDK (Compat Version for seamless single-file integration) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -238,15 +241,11 @@
                             </div>
                         </div>
 
-                        <!-- Custom Chibi Tech Workers SVG Illustration Box -->
+                        <!-- Chibi Radar Box -->
                         <div class="bg-white/90 backdrop-blur-md rounded-2xl border border-wood-200 p-6 flex flex-col items-center justify-center text-center shadow-sm">
                             <h3 class="text-xs font-semibold uppercase tracking-wider text-wood-600 mb-3">BBQ Attending Radar</h3>
-                            
                             <div id="chibiContainer" class="w-28 h-28 mb-3 transition-all duration-300 transform hover:scale-105"></div>
-                        
-                            <div id="chibiStatusBadge" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-1 bg-amber-100 text-amber-800">
-                                Loading mood...
-                            </div>
+                            <div id="chibiStatusBadge" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-1 bg-amber-100 text-amber-800">Loading mood...</div>
                             <p id="chibiMessage" class="text-xs text-wood-600">Checking headcount...</p>
                         </div>
                     </div>
@@ -396,7 +395,7 @@
                 </div>
             </div>
 
-            <!-- TAB 4: EXPENSES (With Download Excel Button) -->
+            <!-- TAB 4: EXPENSES -->
             <div id="tab-expenses" class="tab-content space-y-6">
                 <div class="zen-card zen-shadow rounded-3xl p-6 sm:p-8">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-zen-border">
@@ -406,9 +405,8 @@
                             <p class="text-xs text-stone-600 mt-1">Log receipts for groceries, permits, and equipment. Automatically computes per-person splits.</p>
                         </div>
                         <div class="flex flex-wrap gap-2 w-full sm:w-auto">
-                            <!-- Download Excel Button -->
                             <button onclick="downloadExpensesXlsx()" class="flex-1 sm:flex-none px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-file-excel"></i> Download Excel
+                                <i class="fa-solid fa-file-excel"></i> Download Excel (CSV)
                             </button>
                             <button onclick="openExpenseModal()" class="flex-1 sm:flex-none px-4 py-2.5 bg-wood-800 hover:bg-wood-900 text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-receipt"></i> Log New Receipt
@@ -654,6 +652,20 @@
     </div>
 
     <script>
+        // FIREBASE INITIALIZATION
+        const firebaseConfig = {
+            apiKey: "AIzaSyAr9qO3iiKbrsJjEmkqwi0G5kC68MZJxUA",
+            authDomain: "isd-bbq-2026.firebaseapp.com",
+            projectId: "isd-bbq-2026",
+            storageBucket: "isd-bbq-2026.firebasestorage.app",
+            messagingSenderId: "132204383005",
+            appId: "1:132204383005:web:3cd11de430a4dfeceeaff4",
+            measurementId: "G-5T1BZPR44E"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
         const saturdayDates = [
             { id: 'oct3', label: 'Oct 3, 2026', subtitle: 'First Saturday / 初週' },
             { id: 'oct10', label: 'Oct 10, 2026', subtitle: 'Columbus Weekend / 3連休' },
@@ -663,42 +675,41 @@
         ];
 
         let appState = {
-            votes: [
-                { name: 'Juan Guaranga', dates: ['oct17', 'oct24'] },
-                { name: 'Emily Tanaka', dates: ['oct10', 'oct17'] },
-                { name: 'David Miller', dates: ['oct17', 'oct31'] },
-                { name: 'Yuki Takahashi', dates: ['oct3', 'oct17'] }
-            ],
-            rsvps: [
-                { id: 1, name: 'Juan Guaranga', status: 'Attending', guests: 2, potluck: 'Yakitori skewers & charcoal', dietary: 'None' },
-                { id: 2, name: 'Emily Tanaka', status: 'Attending', guests: 1, potluck: 'Homemade Onigiri & green tea', dietary: 'Vegetarian' },
-                { id: 3, name: 'David Miller', status: 'Attending', guests: 3, potluck: 'Angus beef patties & brioche buns', dietary: 'None' },
-                { id: 4, name: 'Yuki Takahashi', status: 'Attending', guests: 1, potluck: 'Cooler with iced craft beverages', dietary: 'None' },
-                { id: 5, name: 'Sarah Jenkins', status: 'Maybe', guests: 2, potluck: 'Paper plates & napkins', dietary: 'Gluten-free' }
-            ],
-            expenses: [
-                { id: 1, desc: 'Costco Wagyu Patties & Buns', payer: 'David Miller', amount: 92.50 },
-                { id: 2, desc: 'Izakaya Skewers & Marinade', payer: 'Juan Guaranga', amount: 48.00 },
-                { id: 3, desc: 'Plates, Cups & Grill Tools', payer: 'Sarah Jenkins', amount: 24.50 }
-            ],
-            songs: [
-                { id: 1, title: 'Plastic Love', artist: 'Mariya Takeuchi', suggester: 'Emily Tanaka', votes: 6 },
-                { id: 2, title: 'September', artist: 'Earth, Wind & Fire', suggester: 'Juan Guaranga', votes: 5 },
-                { id: 3, title: 'Uptown Funk', artist: 'Mark Ronson ft. Bruno Mars', suggester: 'David Miller', votes: 4 }
-            ]
+            votes: [],
+            rsvps: [],
+            expenses: [],
+            songs: []
         };
 
-        function loadStorage() {
-            const saved = localStorage.getItem('sojitz_isd_bbq_minimalist_2026');
-            if (saved) {
-                try {
-                    appState = JSON.parse(saved);
-                } catch(e) { console.error(e); }
-            }
+        // LOAD & SYNC WITH FIREBASE FIRESTORE IN REAL-TIME
+        function initFirebaseSync() {
+            db.collection("bbq_data").doc("state").onSnapshot((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    appState.votes = data.votes || [];
+                    appState.rsvps = data.rsvps || [];
+                    appState.expenses = data.expenses || [];
+                    appState.songs = data.songs || [];
+                    renderAll();
+                } else {
+                    // Initialize document if it doesn't exist yet
+                    saveStorage();
+                }
+            }, (error) => {
+                console.error("Firestore sync error: ", error);
+            });
         }
 
         function saveStorage() {
-            localStorage.setItem('sojitz_isd_bbq_minimalist_2026', JSON.stringify(appState));
+            db.collection("bbq_data").doc("state").set({
+                votes: appState.votes,
+                rsvps: appState.rsvps,
+                expenses: appState.expenses,
+                songs: appState.songs
+            }).catch((error) => {
+                console.error("Error writing document: ", error);
+                showToast("Error saving to cloud!", "error");
+            });
         }
 
         function handlePasswordSubmit(e) {
@@ -717,7 +728,6 @@
                     setTimeout(() => main.classList.remove('opacity-0'), 50);
                     sessionStorage.setItem('sojitz_isd_auth', 'true');
                     
-                    // Resume active tab on GitHub Pages
                     const lastTab = sessionStorage.getItem('sojitz_active_tab') || 'overview';
                     switchTab(lastTab);
                 }, 500);
@@ -770,7 +780,8 @@
             const totalAttending = appState.rsvps
                 .filter(r => r.status === 'Attending')
                 .reduce((sum, r) => sum + Number(r.guests), 0);
-            document.getElementById('headerRsvpSummary').innerText = `${totalAttending} Attending`;
+            const summaryEl = document.getElementById('headerRsvpSummary');
+            if(summaryEl) summaryEl.innerText = `${totalAttending} Attending`;
         }
 
         function updateChibiMood() {
@@ -855,6 +866,7 @@
             const totalVoters = appState.votes.length || 1;
 
             const container = document.getElementById('votingCardsContainer');
+            if(!container) return;
             container.innerHTML = saturdayDates.map(d => {
                 const count = counts[d.id];
                 const pct = Math.round((count / totalVoters) * 100);
@@ -901,6 +913,7 @@
 
         function renderVoteCheckboxes() {
             const group = document.getElementById('voteCheckboxGroup');
+            if(!group || group.innerHTML.trim() !== '') return;
             group.innerHTML = saturdayDates.map(d => `
                 <label class="flex items-center gap-3 p-3 rounded-xl bg-wood-50 border border-wood-200 hover:bg-wood-100/50 cursor-pointer">
                     <input type="checkbox" name="voteDate" value="${d.id}" class="w-4 h-4 text-wood-800 rounded bg-white border-wood-300">
@@ -1043,7 +1056,6 @@
             }
         }
 
-        // DOWNLOAD EXPENSES AS EXCEL (.xlsx format)
         function downloadExpensesXlsx() {
             const totalSpent = appState.expenses.reduce((sum, e) => sum + Number(e.amount), 0);
             const participantsSet = new Set();
@@ -1056,7 +1068,6 @@
             csvContent += "ISD Sojitz BBQ Expense Ledger\n\n";
             csvContent += "Description,Payer,Amount\n";
             appState.expenses.forEach(e => {
-                // Escape quotes and commas in description/payer
                 const desc = `"${e.desc.replace(/"/g, '""')}"`;
                 const payer = `"${e.payer.replace(/"/g, '""')}"`;
                 csvContent += `${desc},${payer},${Number(e.amount).toFixed(2)}\n`;
@@ -1247,7 +1258,9 @@
         }
 
         window.onload = function() {
-            loadStorage();
+            // Initialize real-time listener with Firebase
+            initFirebaseSync();
+
             if (sessionStorage.getItem('sojitz_isd_auth') === 'true') {
                 document.getElementById('passwordGate').classList.add('hidden');
                 const main = document.getElementById('mainApp');
