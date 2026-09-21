@@ -205,7 +205,7 @@
                         <i class="fa-solid fa-utensils"></i> Bento & Grill / 持ち寄り
                     </button>
                     <button onclick="switchTab('expenses')" class="nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-stone-600 hover:bg-wood-50 hover:text-stone-900 whitespace-nowrap">
-                        <i class="fa-solid fa-receipt"></i> Expense Ledger / 経費精算
+                        <i class="fa-solid fa-receipt"></i> Expense Ledger / 精算内容
                     </button>
                     <button onclick="switchTab('location')" class="nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-stone-600 hover:bg-wood-50 hover:text-stone-900 whitespace-nowrap">
                         <i class="fa-solid fa-map-location-dot"></i> Map & Route / アクセス
@@ -401,7 +401,7 @@
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-zen-border">
                         <div>
                             <div class="text-xs font-mono text-wood-800 uppercase tracking-widest">Financial Settlement Protocol</div>
-                            <h2 class="text-2xl font-bold text-stone-900 mt-1">Expense & Settlement Ledger / 経費精算</h2>
+                            <h2 class="text-2xl font-bold text-stone-900 mt-1">Expense & Settlement Ledger / 精算内容</h2>
                             <p class="text-xs text-stone-600 mt-1">Log receipts for groceries, permits, and equipment. Automatically computes per-person splits.</p>
                         </div>
                         <div class="flex flex-wrap gap-2 w-full sm:w-auto">
@@ -438,7 +438,7 @@
                                 <table class="w-full text-left text-xs sm:text-sm min-w-[400px]">
                                     <thead class="bg-wood-50 text-stone-600 font-mono border-b border-zen-border">
                                         <tr>
-                                            <th class="p-3">Description / 摘要</th>
+                                            <th class="p-3">Description / 内容</th>
                                             <th class="p-3">Payer / 支払者</th>
                                             <th class="p-3">Amount / 金額</th>
                                             <th class="p-3 text-right">Action</th>
@@ -451,7 +451,7 @@
 
                         <div>
                             <h3 class="text-sm font-bold text-stone-900 mb-4 flex items-center gap-2 font-mono">
-                                <i class="fa-solid fa-handshake text-wood-800"></i> SETTLEMENT TRANSACTIONS / 精算指示
+                                <i class="fa-solid fa-handshake text-wood-800"></i> SETTLEMENT TRANSACTIONS / 精算内容
                             </h3>
                             <div id="settlementContainer" class="space-y-3"></div>
                         </div>
@@ -667,11 +667,11 @@
         const db = firebase.firestore();
 
         const saturdayDates = [
-            { id: 'oct3', label: 'Oct 3, 2026', subtitle: 'First Saturday / 初週' },
+            { id: 'oct3', label: 'Oct 3, 2026', subtitle: 'First Saturday / 初旬' },
             { id: 'oct10', label: 'Oct 10, 2026', subtitle: 'Columbus Weekend / 3連休' },
             { id: 'oct17', label: 'Oct 17, 2026', subtitle: 'Mid-October / 中旬' },
             { id: 'oct24', label: 'Oct 24, 2026', subtitle: 'Autumn Peak / 深秋' },
-            { id: 'oct31', label: 'Oct 31, 2026', subtitle: 'Halloween Saturday / 月末' }
+            { id: 'oct31', label: 'Oct 31, 2026', subtitle: 'Halloween Saturday / 下旬' }
         ];
 
         let appState = {
