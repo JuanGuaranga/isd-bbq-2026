@@ -651,7 +651,7 @@
 
     </div>
 
-    <script>
+  <script>
         // FIREBASE INITIALIZATION
         const firebaseConfig = {
             apiKey: "AIzaSyAr9qO3iiKbrsJjEmkqwi0G5kC68MZJxUA",
@@ -667,11 +667,11 @@
         const db = firebase.firestore();
 
         const saturdayDates = [
-            { id: 'oct3', label: 'Oct 3, 2026', subtitle: 'First Saturday / 初旬' },
+            { id: 'oct3', label: 'Oct 3, 2026', subtitle: 'First Saturday / 初週' },
             { id: 'oct10', label: 'Oct 10, 2026', subtitle: 'Columbus Weekend / 3連休' },
             { id: 'oct17', label: 'Oct 17, 2026', subtitle: 'Mid-October / 中旬' },
             { id: 'oct24', label: 'Oct 24, 2026', subtitle: 'Autumn Peak / 深秋' },
-            { id: 'oct31', label: 'Oct 31, 2026', subtitle: 'Halloween Saturday / 下旬' }
+            { id: 'oct31', label: 'Oct 31, 2026', subtitle: 'Halloween Saturday / 月末' }
         ];
 
         let appState = {
@@ -681,34 +681,58 @@
             songs: []
         };
 
-        // LOAD & SYNC WITH FIREBASE FIRESTORE IN REAL-TIME
+        // ROBUST REAL-TIME SYNC WITH LOCAL BACKUP
         function initFirebaseSync() {
             db.collection("bbq_data").doc("state").onSnapshot((doc) => {
                 if (doc.exists) {
                     const data = doc.data();
-                    appState.votes = data.votes || [];
-                    appState.rsvps = data.rsvps || [];
-                    appState.expenses = data.expenses || [];
-                    appState.songs = data.songs || [];
-                    renderAll();
+                    // Only update if cloud data actually has entries, protecting against accidental overwrites
+                    if (data.votes || data.rsvps || data.expenses) {
+                        appState.votes = data.votes || [];
+                        appState.rsvps = data.rsvps || [];
+                        appState.expenses = data.expenses || [];
+                        appState.songs = data.songs || [];
+                        
+                        // Backup to local storage just in case
+                        localStorage.setItem('sojitz_isd_bbq_backup', JSON.stringify(appState));
+                        renderAll();
+                    }
                 } else {
-                    // Initialize document if it doesn't exist yet
-                    saveStorage();
+                    // If cloud doc is missing, try loading local backup or create fresh
+                    const localBackup = localStorage.getItem('sojitz_isd_bbq_backup');
+                    if (localBackup) {
+                        try {
+                            appState = JSON.parse(localBackup);
+                            saveStorage(); // Push local backup to cloud
+                        } catch(e) { saveStorage(); }
+                    } else {
+                        saveStorage();
+                    }
                 }
             }, (error) => {
                 console.error("Firestore sync error: ", error);
+                // Fallback to local storage if offline
+                const saved = localStorage.getItem('sojitz_isd_bbq_minimalist_2026');
+                if (saved) {
+                    try { appState = JSON.parse(saved); renderAll(); } catch(e) {}
+                }
             });
         }
 
         function saveStorage() {
+            // Save to browser backup immediately
+            localStorage.setItem('sojitz_isd_bbq_minimalist_2026', JSON.stringify(appState));
+            localStorage.setItem('sojitz_isd_bbq_backup', JSON.stringify(appState));
+
+            // Save to Firebase Cloud Firestore
             db.collection("bbq_data").doc("state").set({
                 votes: appState.votes,
                 rsvps: appState.rsvps,
                 expenses: appState.expenses,
                 songs: appState.songs
             }).catch((error) => {
-                console.error("Error writing document: ", error);
-                showToast("Error saving to cloud!", "error");
+                console.error("Error writing document to cloud: ", error);
+                showToast("Saved locally, checking cloud connection...", "error");
             });
         }
 
@@ -1258,7 +1282,6 @@
         }
 
         window.onload = function() {
-            // Initialize real-time listener with Firebase
             initFirebaseSync();
 
             if (sessionStorage.getItem('sojitz_isd_auth') === 'true') {
